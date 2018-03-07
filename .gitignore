@@ -1,0 +1,6 @@
+## System and generated files
+.sass-lint.yml
+
+## Directories
+dist/
+node_modules/
