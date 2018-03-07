@@ -113,8 +113,8 @@ MIT
 [webpack-the-confusing-parts]: <https://medium.com/@rajaraodv/webpack-the-confusing-parts-58712f8fcad9>
 [webpack]: <https://webpack.js.org/configuration/>
 [dev-server]: <https://webpack.js.org/configuration/dev-server/>
-[clean-plugin-wp]: <https://github.com/johnagan/clean-webpack-plugin>
-[clean-plugin-git]: <https://webpack.js.org/guides/output-management/#cleaning-up-the-dist-folder>
+[clean-plugin-wp]: <https://webpack.js.org/guides/output-management/#cleaning-up-the-dist-folder>
+[clean-plugin-git]: <https://github.com/johnagan/clean-webpack-plugin>
 [html-loader-wp]: <https://webpack.js.org/loaders/html-loader/>
 [html-loader-git]: <https://github.com/webpack-contrib/html-loader>
 [html-plugin-wp]: <https://webpack.js.org/plugins/html-webpack-plugin/>
