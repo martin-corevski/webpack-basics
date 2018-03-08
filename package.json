@@ -1,7 +1,7 @@
 {
-  "name": "tutorial-webpack",
+  "name": "webpack-basics",
   "version": "1.0.0",
-  "description": "Webpack tutorial, starter configuration",
+  "description": "Webpack 4 basics, starter configuration",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
