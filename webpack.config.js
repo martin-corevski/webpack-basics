@@ -2,9 +2,7 @@ var webpack = require('webpack')
 const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// IMPORTANT: hard disk plugin is not compatible with Webpack 4 at the moment
-// TODO: https://github.com/jantimon/html-webpack-harddisk-plugin/pull/13
-// const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const occurrenceOrderPlugin = new webpack.optimize.OccurrenceOrderPlugin()
@@ -16,14 +14,23 @@ const cleanWebpackPlugin = new CleanWebpackPlugin(['dist'])
  * @type {HtmlWebpackPlugin}
  */
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
-  // alwaysWriteToDisk: true,
+  alwaysWriteToDisk: true,
   template: 'index.html'
 })
-// const htmlWebpackHarddiskPlugin = new HtmlWebpackHarddiskPlugin({
-//   outputPath: path.resolve(__dirname, 'dist')
-// })
+const htmlWebpackHarddiskPlugin = new HtmlWebpackHarddiskPlugin({
+  /**
+   * Output path is used by middleware like webpack dev server as a location from
+   * which files will be served.
+   * @type {String}
+   */
+  outputPath: path.resolve(__dirname, 'dist')
+})
 const extractTextPlugin = new ExtractTextPlugin({
-  filename: 'main.css'
+  /**
+   * Location and filename where the extracted css will be saved.
+   * @type {String}
+   */
+  filename: 'css/main.css'
 })
 
 module.exports = env => {
@@ -54,7 +61,9 @@ module.exports = env => {
      */
     devtool: debug ? 'inline-sourcemap' : false,
     /**
-     * Webpack dev server
+     * Webpack dev server, by adding /webpack-dev-server to the url we can see
+     * where the files are being served from, example:
+     * localhost:8888/webpack-dev-server
      * @type {Object}
      */
     devServer: {
@@ -63,7 +72,7 @@ module.exports = env => {
        * This is only necessary if we want to serve static files.
        * @type {String}
        */
-      contentBase: __dirname, // path.resolve(__dirname, "directory"),
+      contentBase: path.resolve(__dirname, 'dist'),
       /**
        * Watch for changes on all the files under contentBase.
        * @type {Boolean}
@@ -135,7 +144,7 @@ module.exports = env => {
        * https://webpack.js.org/configuration/dev-server/#devserver-publicpath-
        * @type {String}
        */
-      publicPath: '/dist/',
+      // publicPath: '/dist/',
       /**
        * Naming with multiple bundles for multiple entry points is possible:
        * using the entry name "[name].bundle.js"
@@ -143,7 +152,7 @@ module.exports = env => {
        * more on https://webpack.js.org/configuration/output/#output-filename
        * @type {String}
        */
-      filename: 'scripts.min.js'
+      filename: 'js/scripts.min.js'
     },
     /**
      * This option determines how the different types of modules in the project
@@ -214,7 +223,7 @@ module.exports = env => {
                * to .js files https://webpack.js.org/loaders/html-loader/#examples
                * @type {Boolean}
                */
-              minimize: true
+              minimize: !debug // if in production mode minimize html file
             }
           }]
         },
@@ -279,11 +288,9 @@ module.exports = env => {
       /**
        * Enables hard disk file writting for html script injection. This way
        * Webpack's dev server will see the injected script.
-       * Not compatible with Webpack 4 at the moment.
-       * TODO: https://github.com/jantimon/html-webpack-harddisk-plugin/pull/13
        * @type {[type]}
        */
-      // htmlWebpackHarddiskPlugin,
+      htmlWebpackHarddiskPlugin,
       /**
        * Extracts css from the bundle.
        * @type {[type]}
@@ -297,8 +304,7 @@ module.exports = env => {
        */
       cleanWebpackPlugin,
       htmlWebpackPlugin,
-      // TODO: https://github.com/jantimon/html-webpack-harddisk-plugin/pull/13
-      // htmlWebpackHarddiskPlugin,
+      htmlWebpackHarddiskPlugin,
       extractTextPlugin,
       /**
        * Official docs https://github.com/webpack/docs/wiki/optimization:
