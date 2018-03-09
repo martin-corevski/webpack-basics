@@ -144,7 +144,7 @@ module.exports = env => {
        * https://webpack.js.org/configuration/dev-server/#devserver-publicpath-
        * @type {String}
        */
-      // publicPath: '/dist/',
+      publicPath: '/',
       /**
        * Naming with multiple bundles for multiple entry points is possible:
        * using the entry name "[name].bundle.js"
