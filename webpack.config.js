@@ -234,7 +234,13 @@ module.exports = env => {
           use: extractTextPlugin.extract({
             // postcss loader is used in order for autoprefixer to auto add
             // browser specific prefixes
-            use: ['css-loader', 'postcss-loader', 'sass-loader'],
+            use: [
+              'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+              'postcss-loader',
+              'sass-loader'
+            ],
+            // the css loader is set up to use CSS modules spec.
+            // More on https://github.com/webpack-contrib/css-loader#modules
             fallback: 'style-loader'
           })
         },
