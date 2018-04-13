@@ -22,6 +22,7 @@
   "author": "MCorevski",
   "license": "MIT",
   "dependencies": {
+    "dotenv-webpack": "^1.5.5",
     "webpack": "^4.1.1"
   },
   "devDependencies": {

@@ -1,5 +1,7 @@
 ## System and generated files
 .sass-lint.yml
+## .env.dev
+.env.prod
 
 ## Directories
 dist/

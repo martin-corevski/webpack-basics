@@ -91,6 +91,8 @@ npm run watch
 - **File loader**
 -- [file-loader-wp]
 -- [file-loader-git]
+- **Dotenv plugin**
+-- [dotenv-webpack]
 - **Source maps**
 -- [source-maps]
 
@@ -139,4 +141,5 @@ MIT
 [style-loader-git]: <https://github.com/webpack-contrib/style-loader>
 [file-loader-wp]: <https://webpack.js.org/loaders/file-loader/>
 [file-loader-git]: <https://github.com/webpack-contrib/file-loader>
+[dotenv-webpack]: <https://github.com/mrsteele/dotenv-webpack>
 [source-maps]: <http://blog.teamtreehouse.com/introduction-source-maps>

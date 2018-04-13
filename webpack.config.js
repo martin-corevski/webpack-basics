@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 
 const occurrenceOrderPlugin = new webpack.optimize.OccurrenceOrderPlugin()
 const hotModuleReplacementPlugin = new webpack.HotModuleReplacementPlugin()
@@ -310,7 +311,19 @@ module.exports = env => {
        * Extracts css from the bundle.
        * @type {[type]}
        */
-      extractTextPlugin
+      extractTextPlugin,
+      /**
+       * Get environment variables by using process.env, options:
+       * systemvars (false) - If true, will add all system variables as well
+       * silent (false) - If true, all warnings will be surpressed
+       * safe (false) - If false ignore safe-mode, if true load
+       * './.env.example', if a string load that file as the sample.
+       * @type {Object}
+       */
+      new Dotenv({
+        path: '.env.dev',
+        systemvars: true
+      })
     ] : [
       /**
        * We can clear the content from our dist folder before every build:prod
@@ -328,7 +341,11 @@ module.exports = env => {
        * often used ids with a simple option.
        * @type {Object}
        */
-      occurrenceOrderPlugin
+      occurrenceOrderPlugin,
+      new Dotenv({
+        path: '.env.prod',
+        systemvars: true
+      })
     ]
   }
 }
