@@ -47,7 +47,7 @@ npm run build:prod
 ```
 - For development server
 ```
-npm run start
+npm start
 ```
 - For Webpack watch
 ```
@@ -88,6 +88,9 @@ npm run watch
 - **Style loader**
 -- [style-loader-wp]
 -- [style-loader-git]
+- **Url loader**
+-- [url-loader-wp]
+-- [url-loader-git]
 - **File loader**
 -- [file-loader-wp]
 -- [file-loader-git]
@@ -139,6 +142,8 @@ MIT
 [sass-loader-git]: <https://github.com/webpack-contrib/sass-loader>
 [style-loader-wp]: <https://webpack.js.org/loaders/style-loader/>
 [style-loader-git]: <https://github.com/webpack-contrib/style-loader>
+[url-loader-wp]: <https://webpack.js.org/loaders/url-loader/>
+[url-loader-git]: <https://github.com/webpack-contrib/url-loader>
 [file-loader-wp]: <https://webpack.js.org/loaders/file-loader/>
 [file-loader-git]: <https://github.com/webpack-contrib/file-loader>
 [dotenv-webpack]: <https://github.com/mrsteele/dotenv-webpack>
