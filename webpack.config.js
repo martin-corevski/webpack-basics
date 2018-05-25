@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const occurrenceOrderPlugin = new webpack.optimize.OccurrenceOrderPlugin()
 const hotModuleReplacementPlugin = new webpack.HotModuleReplacementPlugin()
@@ -32,6 +33,9 @@ const extractTextPlugin = new ExtractTextPlugin({
    * @type {String}
    */
   filename: 'css/index.css'
+})
+const copyWebpackPlugin = new CopyWebpackPlugin([{ from: './favicon.ico' }], {
+  copyUnmodified: true
 })
 
 module.exports = env => {
@@ -336,7 +340,12 @@ module.exports = env => {
           new Dotenv({
             path: '.env.dev',
             systemvars: true
-          })
+          }),
+          /**
+           * Copy static files such as favicon.ico.
+           * @type {Object}
+           */
+          copyWebpackPlugin
         ]
       : [
           /**
@@ -359,7 +368,8 @@ module.exports = env => {
           new Dotenv({
             path: '.env.prod',
             systemvars: true
-          })
+          }),
+          copyWebpackPlugin
         ]
   }
 }
