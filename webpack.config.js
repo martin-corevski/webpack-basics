@@ -274,7 +274,7 @@ module.exports = env => {
               loader: 'url-loader',
               options: {
                 limit: 8192, // return DataURL if image size <= 8KB
-                name: 'assets/[name].[ext]',
+                name: 'assets/images/[name].[ext]',
                 fallback: 'file-loader' // use file loader for size > 8KB
               }
             }
@@ -283,7 +283,19 @@ module.exports = env => {
         // File loader for fonts
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/,
-          use: ['file-loader']
+          use: {
+            loader: 'url-loader',
+            options: {
+              // Limit at 10k. Above that emit separate files
+              limit: 10000,
+              // url-loader sets mimetype if it's passed.
+              // Without this it derives it from the file extension
+              mimetype: 'application/font-woff',
+              // Output below fonts directory
+              name: 'assets/fonts/[name].[ext]',
+              fallback: 'file-loader' // use file loader for size > 10KB
+            }
+          }
         }
       ]
     },
@@ -299,7 +311,12 @@ module.exports = env => {
            * For production we can uglify the .js files.
            * @type {Boolean}
            */
-          minimize: true
+          minimize: true,
+          // Split code into separate files
+          splitChunks: {
+            // include all types of chunks
+            chunks: 'all'
+          }
         },
     /**
      * The plugins option is used to customize the Webpack build process in
